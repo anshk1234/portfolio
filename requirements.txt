@@ -1,0 +1,6 @@
+streamlit-lottie
+streamlit
+requests
+Pillow
+protobuf
+watchdog
