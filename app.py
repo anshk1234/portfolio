@@ -6,10 +6,6 @@ from PIL import Image
 # Set up page
 st.set_page_config(page_title="portfolio", page_icon=":tada:", layout="wide")
 
-# ---- DEVICE DETECTION ----
-user_agent = st.config.get_option("browser.user_agent").lower()
-is_mobile_device = "mobile" in user_agent or "android" in user_agent or "iphone" in user_agent
-
 # Load Lottie from URL
 def load_lottieurl(url):
     r = requests.get(url)
@@ -52,7 +48,8 @@ with st.container():
             """
         )
     with right_column:
-        st_lottie(lottie_coding, height=300, key="coding", loop=not is_mobile_device)
+        
+        st_lottie(lottie_coding, height=300, key="coding", loop=False)
 
 # ---- PROJECTS ----
 with st.container():
