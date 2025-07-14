@@ -3,23 +3,24 @@ import streamlit as st
 from streamlit_lottie import st_lottie
 from PIL import Image
 
-
-# Find more emojis here: https://www.webfx.com/tools/emoji-cheat-sheet/
+# Set up page
 st.set_page_config(page_title="portfolio", page_icon=":tada:", layout="wide")
 
+# ---- DEVICE DETECTION ----
+user_agent = st.config.get_option("browser.user_agent").lower()
+is_mobile_device = "mobile" in user_agent or "android" in user_agent or "iphone" in user_agent
 
+# Load Lottie from URL
 def load_lottieurl(url):
     r = requests.get(url)
     if r.status_code != 200:
         return None
     return r.json()
 
-
 # Use local CSS
 def local_css(file_name):
     with open(file_name) as f:
         st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
-
 
 local_css("style/style.css")
 
@@ -34,9 +35,7 @@ img_quote_generator_app = Image.open("images/quote_generator_app.png")
 with st.container():
     st.subheader("Hi, I am Ansh :wave:")
     st.title("A Web App Developer and designer from India")
-    st.write(
-        "I am passionate about working on my ideas and interested in web app development."
-    )
+    st.write("I am passionate about working on my ideas and interested in web app development.")
     st.write("[Learn More >](https://share.streamlit.io/user/anshk1234)")
 
 # ---- WHAT I DO ----
@@ -51,11 +50,9 @@ with st.container():
             I'm a Class 12 student passionate about crafting interactive and visually appealing web applications using Streamlit and Python. I love building projects that strike a balance between usefulness and fun—turning ideas into tools that make life a little easier or more delightful.
             I'm always exploring new ways to blend creativity with functionality.
             """
-            
         )
-        
     with right_column:
-        st_lottie(lottie_coding, height=300, key="coding")
+        st_lottie(lottie_coding, height=300, key="coding", loop=not is_mobile_device)
 
 # ---- PROJECTS ----
 with st.container():
@@ -76,7 +73,6 @@ with st.container():
             """
         )
         st.markdown("[See App...](https://study-app-tuxkvrvlrrmqextrtvy4rb.streamlit.app/)")
-
 
 with st.container():
     image_column, text_column = st.columns((1, 2))
@@ -133,8 +129,6 @@ with st.container():
     st.write("---")
     st.header("Get In Touch With Me!")
     st.write("##")
-
-    # Documention: https://formsubmit.co/ !!! CHANGE EMAIL ADDRESS !!!
     contact_form = """
     <form action="https://formsubmit.co/anshkunwar3009@gmail.com" method="POST">
         <input type="hidden" name="_captcha" value="false">
