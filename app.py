@@ -1,3 +1,4 @@
+import json
 import requests
 import streamlit as st
 from streamlit_lottie import st_lottie
@@ -6,12 +7,10 @@ from PIL import Image
 # Set up page
 st.set_page_config(page_title="portfolio", page_icon=":tada:", layout="wide")
 
-# Load Lottie from URL
-def load_lottieurl(url):
-    r = requests.get(url)
-    if r.status_code != 200:
-        return None
-    return r.json()
+# Load Lottie from local file
+def load_lottiefile(filepath: str):
+    with open(filepath, "r") as f:
+        return json.load(f)
 
 # Use local CSS
 def local_css(file_name):
@@ -21,7 +20,7 @@ def local_css(file_name):
 local_css("style/style.css")
 
 # ---- LOAD ASSETS ----
-lottie_coding = load_lottieurl("https://assets5.lottiefiles.com/packages/lf20_fcfjwiyb.json")
+lottie_coding = load_lottiefile("coding.json")
 img_study_app = Image.open("images/study_app.png")
 img_matrix_calculator = Image.open("images/matrix_calculator.png")
 img_music_app = Image.open("images/music_app.png")
@@ -48,8 +47,7 @@ with st.container():
             """
         )
     with right_column:
-        
-        st_lottie(lottie_coding, height=300, key="coding", loop=False)
+        st_lottie(lottie_coding, height=300, key="coding", loop=False, speed=0.0)
 
 # ---- PROJECTS ----
 with st.container():
