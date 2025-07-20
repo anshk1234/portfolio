@@ -67,7 +67,7 @@ with st.container():
             It is a great way to stay organized and motivated in your studies.           
             """
         )
-        st.markdown("[See App...](https://study-app-tuxkvrvlrrmqextrtvy4rb.streamlit.app/)")
+        st.markdown("[See App...](https://study-tracker-app.streamlit.app/)")
 
 with st.container():
     image_column, text_column = st.columns((1, 2))
